@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html> 
+<body>
+<h2> OPEN THE CONSOLE TO VIEW THE OUTPUT </h2>
+<h3 id="Q1"></h3>
+<script>
+	document.getElementById("Q1").innerHTML = "CODE FOR QUESTION 1";
+	console.log( "CODE FOR QUESTION 1");
+	let arrQ1 = ['a','b','c'];
+	console.log( arrQ1[2]); // prints "c" on the console
+	console.log( arrQ1['2']); // again prints "c" on the console, so a string is accepted as a subscript
+
+	arrQ1['efe'] = 33; // legal
+	console.log( arrQ1['efe']); // prints "33"
+
+	arrQ1[true] = 7; // legal statement
+	console.log( arrQ1); // prints [ 'a', 'b', 'c', true: 7 ]
+
+	console.log(arrQ1['2']); // prints "c"
+	console.log(arrQ1['02']); // prints "undefined" since '2' and '02' are different strings
+	arrQ1[undefined] = 5; // legal
+	arrQ1[null] = 9; // legal
+	let arr2 = [3,4];
+	arrQ1[arr2] = 43; // legal
+	const person = {firstName:"Efe", lastName:"Beydogan", age:20, eyeColor:"brown"};
+	arrQ1[person] = person; // legal
+	console.log( arrQ1);
+</script>
+
+<h3 id="Q2"></h3>
+
+<script>
+	document.getElementById("Q2").innerHTML = "CODE FOR QUESTION 2";
+	console.log( "CODE FOR QUESTION 2");
+	let arrQ2 = [1, 2, 3];
+	console.log( arrQ2[1]); // prints "2" 
+	console.log( arrQ2[7]); // prints "undefined"
+	console.log( arrQ2["CS315"]); // again prints "undefined", however it is not an error	
+</script>
+
+<h3 id="Q3"></h3>
+
+<script>
+	document.getElementById("Q3").innerHTML = "CODE FOR QUESTION 3";
+	console.log( "CODE FOR QUESTION 3");
+	let arrQ3 = [1, 2, 3];
+	console.log( arrQ3[1]); // prints "2" 
+	console.log( arrQ3[7]); // prints "undefined"
+	arrQ3[10] = 5; // legal, even though the array has a length of 3 at the moment
+	arrQ3['word'] = 9;
+	console.log( "length: " + arrQ3.length); // prints "length: "11", there are 7 empty items and although arrQ3['word'] is also initialized, it doesn’t alter length
+	arrQ3[4294967294] = 91; // this is 2^32 - 2, and is a legal index
+	console.log( arrQ3); // prints [ 1, 2, 3, <7 empty items>, 5, <4294967283 empty items>, 91 ]
+	arrQ3[4294967295] = 101;
+	arrQ3[-3] = 101; // not a legal index but a property name
+	console.log( arrQ3);
+</script>
+
+<h3 id="Q4"></h3>
+
+<script>
+	document.getElementById("Q4").innerHTML = "CODE FOR QUESTION 4";
+	console.log( "CODE FOR QUESTION 4");
+	let arrQ4 = new Array( 15, 16, 17); // creates an initial array
+	arrQ4[8] = 31; // legal statement, shows array length can be changed
+	arrQ4['HAG'] = "Halil Hoca"; // also legal, array can be grown arbitrarily
+	console.log( arrQ4); // prints "[ 15, 16, 17, <5 empty items>, 31, HAG: 'Halil Hoca' ]"
+	arrQ4.length = 1; // length can be shortened this way, doesn't affect property names
+	console.log( arrQ4); // prints [ 15, HAG: 'Halil Hoca' ]
+	console.log( arrQ4.shift()); // removes "15" from the array
+</script>
+
+<h3 id="Q5"></h3>
+
+<script>
+	document.getElementById("Q5").innerHTML = "CODE FOR QUESTION 5";
+	console.log( "CODE FOR QUESTION 5");
+	let rectangularArray = [[1,2,3], [1,2,3], [1,2,3]];
+	console.log( rectangularArray); // prints [ [ 1, 2, 3 ], [ 1, 2, 3 ], [ 1, 2, 3 ] ]
+	let raggedArray = [[1,2,3,], [1,2], [1]];
+	console.log( raggedArray); // prints [ [ 1, 2, 3 ], [ 1, 2 ], [ 1 ] ]
+</script>
+
+<h3 id="Q6"></h3>
+
+<script>
+	document.getElementById("Q6").innerHTML = "CODE FOR QUESTION 6";
+	console.log( "CODE FOR QUESTION 6");
+	let arrQ6_2 = [33, 34, 35]; // creates an array of length 3 and initializes elements
+	let arrQ6 = Array(3); // creates an array of length 3
+	console.log( arrQ6); // prints "[ <3 empty items> ]"
+	arrQ6[0] = 1;
+	arrQ6[1] = 2;
+	arrQ6[2] = 3;
+	console.log( arrQ6); // prints "[ 1, 2, 3 ]"
+</script>
+
+<h3 id="Q7"></h3>
+
+<script>
+	document.getElementById("Q7").innerHTML = "CODE FOR QUESTION 7";
+	console.log( "CODE FOR QUESTION 7");
+	const names = ["Efe", "Emir", "Arda", "Eren"];
+	console.log( names.slice(2)); // prints [ 'Arda', 'Eren' ]
+	console.log( names.slice( 1,3)); // prints [ 'Emir', 'Arda' ]
+	console.log( names.slice( -2)); // prints [ 'Arda', 'Eren' ]
+	console.log( names.slice(0,7)); // prints [ 'Efe', 'Emir', 'Arda', 'Eren' ]
+	console.log( names.slice( 2, -1)); // prints [ 'Arda' ]
+</script>
+
+<h3 id="Q8"></h3>
+
+<script>
+	document.getElementById("Q8").innerHTML = "CODE FOR QUESTION 8";
+	console.log( "CODE FOR QUESTION 8");
+	const names1 = ["Efe", "Emir"];
+	const names2 = ["Arda", "Eren"];
+
+	const names3 = [...names1, ...names2]; // concats the two arrays
+	console.log( names3); // prints [ 'Efe', 'Emir', 'Arda', 'Eren' ]
+	const namesClone = [...names1]; // clones names1 array
+	console.log( namesClone) // prints [ 'Efe', 'Emir' ]
+	names5 = names1 + names2; // doesn't work, names5 becomes a string
+	console.log( typeof( names5)); // prints string
+	console.log( names1 === names2); // prints false
+	console.log( names1 != names2); // prints true
+	console.log( names1 == names2); // prints false
+</script>
+
+</body>
+</html>

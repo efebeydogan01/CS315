@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html> 
+<body>
+<h2> OPEN THE CONSOLE TO VIEW THE OUTPUT </h2>
+<h3 id="Q1"></h3>
+<script>
+	document.getElementById("Q1").innerHTML = "CODE FOR QUESTION 1";
+	console.log( "CODE FOR QUESTION 1");
+	console.log( 7 > 1); // prints "true"
+	console.log( 1 > 31); // prints "false"
+
+	console.log( Boolean( 0)); // false
+	console.log( Boolean( -0)); // false
+	console.log( Boolean(0n)); // false
+	console.log( Boolean( "")); // false
+	let x; // x is undefined
+	console.log( Boolean( x)); // undefined is false
+	x = null;
+	console.log( Boolean( x)); // null is false
+	x = false;
+	console.log( Boolean( x)); // false is false
+	x = "Efe" / 5; // x is NaN
+	console.log( Boolean( x)); // NaN is false
+
+	x = "Efe";
+	console.log( Boolean( x)); // x has a value now, so it is "true"
+	x = []; // empty array Object
+	console.log( Boolean( x)); // interpreted as true
+	x = "false";
+	console.log( Boolean( x)); // interpreted as true
+	x = new Boolean(false); // x is a boolean object
+	console.log( Boolean( x)); // interpreted as true, x has a value
+</script>
+
+<h3 id="Q2"></h3>
+
+<script>
+	document.getElementById("Q2").innerHTML = "CODE FOR QUESTION 2";
+	console.log( "CODE FOR QUESTION 2");	
+	let z = 1 && "efe" && 0 && []; // sets x = 0
+	console.log( z); // prints "0", && returns the first falsy value it encounters
+
+	z = 1 && "efe" && true && [];
+	console.log( z); // prints "[]", sets x to the last operand since all of them are truthy
+
+	let y = 0 || "" || 31 || 0n; // sets y = 31
+	console.log( y); // prints "31", || returns the first truthy value it encounters
+
+	y = 0 || "" || -0 || null;
+	console.log( y); // prints "null", sets y to the last operand because all of them are falsy
+	
+	let p = null ?? 5;
+	console.log( p); // prints 5
+</script>
+
+<h3 id="Q3"></h3>
+
+<script>
+	document.getElementById("Q3").innerHTML = "CODE FOR QUESTION 3";
+	console.log( "CODE FOR QUESTION 3");
+	console.log( "AND operation");
+	let a = 5;
+	let b = 10;
+	if ( 0 && a++ > b) {
+	  // does not enter here
+	}
+	else {
+	  console.log( a); // prints "5", a wasn't incremented due to short-circuiting
+	}
+
+	if ( true && b++ > a) console.log( b); // prints "11", b was incremented
+
+	false && console.log( "not printed"); // not printed because AND operation ends as soon as false is encountered
+
+	true && console.log( "printed!"); // prints "printed!" because first operand is true, so second operand is checked
+
+	console.log( "OR operation");
+	a = 5;
+	b = 10;
+
+	if ( true || ++b > a ) {
+	  console.log( "b is " + b); // prints "b is 10", b isn't incremented due to short circuiting
+	}
+
+	if ( false || ++b > a ) {
+	  console.log( "b is " + b); // prints "b is 11", b is incremented
+	}
+
+	39 || console.log( "not printed"); // not printed because first operand is truthy
+	undefined || console.log( "printed"); // now this is printed because first operand is falsy
+	
+	console.log( "?? operator");
+    let l = undefined ?? a++;
+    console.log( l); // prints 5, a is not incremented first
+    console.log( a); // prints 6, a was incremented because second operand was evaluated
+    
+    null ?? console.log( "entered here"); // logs this
+    5 ?? console.log( "not logged"); // this time it isn't called due to short circuiting
+</script>
+
+<h3 id="Q4"></h3>
+
+<script>
+	document.getElementById("Q4").innerHTML = "CODE FOR QUESTION 4";
+	console.log( "CODE FOR QUESTION 4");
+	var arr1 = [31,32,33,34,35,36,37];
+
+	for ( let i = 0; i <= arr1.length; i++) { // loop continues until i = length, so out of bounds error should occur
+		if ( i < arr1.length && arr1[i] > 30) { // no error is given due to the first expression
+			console.log( arr1[i]); // prints all of the array's contents without an error
+		}
+	}
+</script>
+
+<h3 id="Q5"></h3>
+
+<script>
+	document.getElementById("Q5").innerHTML = "CODE FOR QUESTION 5";
+	console.log( "CODE FOR QUESTION 5");
+	let q = 150;
+
+	for ( let i = 0; i < 10; i++) { 
+	  if ( false && q++) { // q is never incremented
+		console.log( "not entered"); // never entered
+	  }
+	  else {
+		console.log( q); // always prints "150"
+	  }
+	}
+</script>
+
+</body>
+</html>
