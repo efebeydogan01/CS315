@@ -1,0 +1,262 @@
+?PROGRAM 1?
+
+void upBy( double height) {
+    double groundLevel = <altitude>;
+
+    ? starts going up with a speed of 0.1 m/s ?
+    up();
+
+    ? go up until specified height is reached ?
+    while (<altitude> <= groundLevel + height) {
+        out("Levitating...");
+    }
+
+    verticalStop();
+}
+
+? rotates left by the given amount ?
+void rotateLeft( int degrees) {
+    for (int i = 0; i < degrees; i = i + 1)
+        left();
+}
+
+? rotates right by the given amount ?
+void rotateRight( int degrees) {
+    for (int i = 0; i < degrees; i = i + 1)
+        right();
+}
+
+? faces the given direction ?
+? 'N' = north, 'E' = east, 'S' = south, 'W' = west ?
+void face( char direction) {
+    int aimedDirection;
+    
+    if (direction == 'N')
+        aimedDirection = 0;
+    else if (direction == 'E')
+        aimedDirection = 90;
+    else if (direction == 'S')
+        aimedDirection = 180;
+    else if (direction == 'W')
+        aimedDirection = 270;
+    else
+        return;
+    
+    ? if left rotation is faster then turn left, else turn right ?
+    if ((<heading> - aimedDirection) % 360 <= 180)
+        rotateLeft((<heading> - aimedDirection) % 360);
+    else
+        rotateRight((aimedDirection - <heading>) % 360);
+}
+
+
+? main program starts here ?
+
+connect();
+
+int fieldSize = in();
+
+upBy( 50.0);
+
+? face north ?
+face( 'N');
+
+nozzleOn();
+
+? traverse the field with nozzle on ?
+for (int traversedWidth = 0; traversedWidth < fieldSize; i = i + 10) {
+    goDistance(fieldSize);
+    
+    if (i % 20 == 0) {
+        rotateRight(90);
+        goDistance(10);
+        rotateRight(90);
+    }
+    else {
+        rotateLeft(90);
+        goDistance(10);
+        rotateLeft(90);
+    }
+}
+
+nozzleOff();
+
+
+
+
+
+
+
+
+?PROGRAM 2?
+
+connect();
+
+int groundLevel = <altitude>;
+
+up();
+
+while (<altitude> <= groundLevel + 50) {
+    out("Levitating...");
+}
+
+verticalStop();
+
+
+
+
+
+
+
+?PROGRAM 3?
+
+connect();
+
+up();
+forward();
+
+double heading = <heading>;
+
+if ( heading <= 270) {
+	while ( <heading> <= 270) {
+		right();
+	}
+}
+
+verticalStop();
+nozzleOn();
+
+
+
+
+
+
+
+?PROGRAM 4?
+
+int maxTemp = 35;
+int isTempHigher( double temp) {
+	if ( temp > maxTemp) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+int isHigher = isTempHigher( <temperature>);
+
+if ( isHigher) {
+	down();
+}
+
+
+
+
+
+
+
+?PROGRAM 5?
+
+? this program prints out a statement depending on the altitude ?
+
+void printMessage( double altitude) {
+	if ( altitude != 1250) {
+		out('Y');
+	}
+	else if ( altitude >= 1250) {
+		out( "Higher than 1250 meters");
+	}
+	else {
+		out( "Lower than 1250 meters");
+	}
+}
+
+printMessage( <altitude>);
+
+
+
+
+
+
+
+?PROGRAM 6?
+
+connect()
+
+double maxTemp = <temperature> - 10;
+int continue = 1;
+
+up();
+
+while ( <temperature> > maxTemp && continue) {
+	out( <temperature>);
+	if ( <altitude> > 1000) {
+		out( "Dangerously high!");
+		if ( <altitude> > 2500) {
+			continue = 0;
+		}
+	}
+}
+
+verticalStop();
+
+
+
+
+
+
+
+?PROGRAM 7?
+
+void movementInformation( double horizontalSpeed, double verticalSpeed) {
+	string moving = "Moving. ";
+	string forward = "Moving forward. ";
+	string backward = "Moving backward. ";
+	string up = "Moving up. ";
+	string down = "Moving down. ";
+	
+	if ( horizontalSpeed || verticalSpeed) {
+		out( moving);
+		if ( horizontalSpeed > 0) {
+			out( forward);
+		}
+		else if ( horizontalSpeed < 0) {
+			out( backward);
+		}
+		
+		if ( verticalSpeed > 0) {
+			out( up);
+		}
+		else if ( verticalSpeed < 0) {
+			out( down);
+		}
+	}
+	else {
+		out( "Not moving. ");
+	}
+}
+
+connect();
+backward();
+
+movementInformation( horizontalSpeed(), verticalSpeed());
+
+
+
+
+
+
+?PROGRAM 8?
+
+connect();
+
+if ( <altitude> > 1000.0) {
+    ? Spray the chemical while altitude is higher than 1000 meters ?
+    nozzleOn();
+    down();
+    while ( <altitude> > 1000) {}
+    nozzleOff();
+}
+
+verticalStop();

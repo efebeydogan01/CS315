@@ -1,0 +1,85 @@
+? THIS FILE IS TO TEST SOME MORE EDGE CASES THAT ARE NOT TESTED IN THE OTHER TWO PROGRAMS ?
+
+start
+
+int minTemp = 35;
+
+boolean f_isTempLower( double temp) {
+	if ( temp < minTemp) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void f_movementInformation( double horizontalSpeed, double verticalSpeed) {
+	string moving = "Moving. ";
+	string forward = "Moving forward. ";
+	string backward = "Moving backward. ";
+	string up = "Moving up. ";
+	string down = "Moving down. ";
+	
+	if ( horizontalSpeed || verticalSpeed) {
+		out( moving);
+		if ( horizontalSpeed > 0) {
+			out( forward);
+		}
+		elseif ( horizontalSpeed < 0) {
+			out( backward);
+		}
+		else {
+			out( "Not moving in horizontal direction.");
+		}
+		
+		if ( verticalSpeed > 0) {
+			out( up);
+		}
+		elseif ( verticalSpeed < 0) {
+			out( down);
+		}
+		else {
+			out( "Not moving in horizontal direction.");
+		}
+	}
+	else {
+		out( "Not moving. ");
+	}
+}
+
+void f_spiralDown() {
+	down();
+	for (int alt = <altitude>; alt > 100; alt = <altitude>) {
+		for (int head = <heading>; head < 360; head = <heading>) {
+			right();
+		}
+	}
+}
+
+main() {
+	connect();
+	
+	? check temperature ?
+	boolean isLower = f_isTempLower( <temperature>);
+	if ( isLower) {
+		down();
+	}
+	
+	if ( <altitude> > 1000.0) {
+		? Spray the chemical while altitude is higher than 1000 meters ?
+		nozzleOn();
+		down();
+		
+		while ( <altitude> > 1000) {}
+		
+		nozzleOff();
+	}
+	
+	f_movementInformation( horizontalSpeed(), verticalSpeed());
+	
+	verticalStop();
+	
+	f_spiralDown();
+}
+
+end

@@ -1,0 +1,98 @@
+? This program traverses and sprays a triangular field (equilateral) with the edge length given as input. ?
+? Start point is assumed to be the southwest corner of the field. ?
+
+start
+
+void f_upBy( double height) {
+    double groundLevel = <altitude>;
+
+    ? starts going up with a speed of 0.1 m/s ?
+    up();
+
+    ? go up until specified height is reached ?
+    while (<altitude> <= groundLevel + height) {
+        out("Levitating...");
+    }
+
+    verticalStop();
+	return;
+}
+
+? rotates clockwise by the given amount ?
+? rotates right if input >= 0 and left otherwise ?
+void f_rotate( int degrees) {
+	if (degrees >= 0) {
+		for (int i = 0; i < degrees; i = i + 1) {
+			right();
+		}
+	}
+	else {
+		degrees = -1 * degrees;
+		for (int i = 0; i < degrees; i = i + 1) {
+			left();
+		}
+	}
+	return;
+}
+
+? faces the given direction ?
+? 'N' = north, 'E' = east, 'S' = south, 'W' = west ?
+void f_face( char direction) {
+    int aimedDirection;
+    
+    if (direction == 'N') {
+        aimedDirection = 0;
+	}
+    elseif (direction == 'E') {
+        aimedDirection = 90;
+	}
+    elseif (direction == 'S') {
+        aimedDirection = 180;
+	}
+    elseif (direction == 'W') {
+        aimedDirection = 270;
+	}
+    else {
+        return;
+	}
+    
+    ? if left rotation is faster then turn left, else turn right ?
+    if ((<heading> - aimedDirection) % 360 <= 180) {
+        f_rotate(-1 * ((<heading> - aimedDirection) % 360));
+	}
+    else {
+        f_rotate((aimedDirection - <heading>) % 360);
+	}
+	return;
+}
+
+
+? main program starts here ?
+main() {
+
+	connect();
+	
+	? input the edge length of the square field ?
+	int fieldSize = in();
+
+	f_upBy( 50.0);
+
+	? face 30 degrees east of north ?
+	f_face( 'N');
+	f_rotate(30);
+
+	nozzleOn();
+
+	? traverse the field with nozzle on ?
+	goDistance(fieldSize);
+	f_rotate(60);
+	
+	for (int traversedWidth = fieldSize; traversedWidth > 0; traversedWidth = traversedWidth - 10) {
+		goDistance(traversedWidth);
+		
+		f_rotate(60);
+	}
+
+	nozzleOff();
+}
+end
